@@ -11,8 +11,10 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
-//= require turbolinks
 //= require bootstrap
+//= require ckeditor/ckeditor
+//= require ckeditor/adapters/jquery
 
-//= require_tree .
+$(document).ready(function() {
+    $('.bind-ckeditor').ckeditor()
+})

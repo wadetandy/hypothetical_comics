@@ -7,6 +7,7 @@ gem 'rails', '4.1.1'
 gem 'sqlite3'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
+gem 'haml', '~> 4.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
@@ -53,6 +54,8 @@ gem 'binding_of_caller'
 gem 'acts_as_votable', github: 'ryanto/acts_as_votable'
 gem 'validates_formatting_of'
 gem 'tzinfo-data'
+
+gem 'sanitize'
 
 group :development, :test do
   gem 'dotenv-rails'

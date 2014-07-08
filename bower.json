@@ -1,0 +1,16 @@
+{
+  "name": "hyp-comics",
+  "version": "0.0.0",
+  "authors": [],
+  "license": "Private",
+  "dependencies": {
+    "underscore": "latest",
+    "jquery":     "latest",
+    "angular":    "~> 1.2.x",
+    "angular-resource":    "~> 1.2.x"
+  },
+  "devDependencies": {
+    "angular-mocks": "~> 1.2.x"
+  },
+  "private": true
+}
