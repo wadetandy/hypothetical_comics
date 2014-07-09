@@ -1,0 +1,23 @@
+- model_class = Comment
+.page-header
+  %h1= t '.title', :default => Comment
+.fieldset
+  %dl
+    %dt.label.label-default= model_class.human_attribute_name(:text)
+    %dd
+      %pre.prettyprint= @comment.text
+    %dt.label.label-default= model_class.human_attribute_name(:deleted_at)
+    %dd
+      %pre.prettyprint= @comment.deleted_at
+.form-group
+  = link_to t('.back', :default => t("helpers.links.back")), |
+    comments_path, :class => 'btn btn-default'               |
+  -#
+  = link_to t('.edit', :default => t("helpers.links.edit")), |
+    edit_comment_path(@comment), :class => 'btn btn-default' |
+  -#
+  = link_to t('.destroy', :default => t("helpers.links.destroy")),                                               |
+    comment_path(@comment),                                                                                      |
+    :method => 'delete',                                                                                         |
+    :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, |
+    :class => 'btn btn-danger'                                                                                   |

@@ -1,0 +1,4 @@
+- model_class = Story
+.page-header
+  %h1= t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => Story
+= render :partial => 'form'
