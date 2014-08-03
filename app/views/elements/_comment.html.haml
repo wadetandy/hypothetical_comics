@@ -1,0 +1,10 @@
+%li.media
+  = user_avatar(comment.user, class: 'pull-left')
+  .media-body
+    %h4.media-heading
+      = comment.title
+    %p
+      = comment.text
+    %ul
+      - comment.children.each do |comment|
+        = render partial: 'elements/comment', locals: { comment: comment }

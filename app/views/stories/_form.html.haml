@@ -1,14 +1,9 @@
-= form_for @story, :html => { :class => 'form-horizontal form-model' } do |f|
+= form_for @story, html: {} do |f|
   .form-group
-    = f.label :text, :class => 'control-label col-md-2'
-    .col-md-10
-      = f.text_area :text, :class => 'text-field form-control bind-ckeditor'
+    = f.text_field :title, :class => 'text-field form-control', placeholder: "Story Title"
   .form-group
-    = f.label :title, :class => 'control-label col-md-2'
-    .col-md-10
-      = f.text_field :title, :class => 'text-field form-control'
+    = f.text_area :text, :class => 'text-field form-control bind-ckeditor'
   .form-group
-    .col-md-offset-2.col-md-10
-      = f.submit nil, :class => 'btn btn-primary'
-      = link_to t('.cancel', :default => t("helpers.links.cancel")), |
-        stories_path, :class => 'btn btn-default'                    |
+    = f.submit nil, :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), |
+      stories_path, :class => 'btn btn-default'                    |

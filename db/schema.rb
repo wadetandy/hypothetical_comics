@@ -14,13 +14,18 @@
 ActiveRecord::Schema.define(version: 20140708185807) do
 
   create_table "comments", force: true do |t|
+    t.string   "title"
     t.text     "text"
     t.datetime "deleted_at"
     t.integer  "user_id"
+    t.integer  "comment_id"
+    t.integer  "story_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "comments", ["comment_id"], name: "index_comments_on_comment_id"
+  add_index "comments", ["story_id"], name: "index_comments_on_story_id"
   add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "delayed_jobs", force: true do |t|
@@ -42,6 +47,7 @@ ActiveRecord::Schema.define(version: 20140708185807) do
   create_table "stories", force: true do |t|
     t.text     "text"
     t.string   "title"
+    t.boolean  "published",  default: false
     t.datetime "deleted_at"
     t.integer  "user_id"
     t.datetime "created_at"

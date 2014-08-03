@@ -1,17 +1,9 @@
 - model_class = Story
 .page-header
-  %h1= t '.title', :default => Story
-.fieldset
-  %dl
-    %dt.label.label-default= model_class.human_attribute_name(:title)
-    %dd
-      %pre.prettyprint= @story.title
-    %dt.label.label-default= model_class.human_attribute_name(:deleted_at)
-    %dd
-      %pre.prettyprint= @story.deleted_at
-  .story-text
-    = raw @story.text
-  %p
+  %h1= @story.title
+.story-text
+  = raw @story.text
+
 .form-group
   = link_to t('.back', :default => t("helpers.links.back")), |
     stories_path, :class => 'btn btn-default'                |
@@ -24,3 +16,17 @@
     :method => 'delete',                                                                                         |
     :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, |
     :class => 'btn btn-danger'                                                                                   |
+
+.comments
+  %ul.media-list
+    - @story.comments.each do |comment|
+      = render partial: 'elements/comment', locals: { comment: comment }
+
+  = simple_form_for [@story, @story.comments.build] do |f|
+    .form-group
+      = f.label :text, :class => 'control-label col-md-1'
+      .col-md-11
+        = f.text_area :text, rows: 3, :class => 'text-field form-control'
+    .form-group
+      .col-md-10
+        = f.submit nil, :class => 'btn btn-primary'
