@@ -1,11 +1,12 @@
 class StoriesController < ApplicationController
+  include VotableControllerMixin
 
   before_filter :require_user_signed_in, only: [:new, :edit, :create, :update, :destroy]
 
-  before_action :set_story, only: [:edit, :update, :destroy, :vote]
+  before_action :set_story, only: [:edit, :update, :destroy]
 
   def index
-    @stories = Story.all
+    @stories = Story.all.includes(:user)
   end
 
   def show
@@ -54,32 +55,27 @@ class StoriesController < ApplicationController
     end
   end
 
-
-  def vote
-    direction = params[:direction]
-
-    # Make sure we've specified a direction
-    raise "No direction parameter specified to #vote action." unless direction
-
-    # Make sure the direction is valid
-    unless ["like", "bad"].member? direction
-      raise "Direction '#{direction}' is not a valid direction for vote method."
-    end
-
-    @story.vote_by voter: current_user, vote: direction
-
-    redirect_to action: :index
+  def downvote
+    @story = Story.find(params[:id])
+    submit_downvote(@story, current_user)
+    redirect_to @story
   end
 
+  def upvote
+    @story = Story.find(params[:id])
+    submit_upvote(@story, current_user)
+    redirect_to @story
+  end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_story
-      @story = current_user.stories.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def story_params
-      params.require(:story).permit(:text, :title)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_story
+    @story = current_user.stories.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def story_params
+    params.require(:story).permit(:text, :title)
+  end
 end

@@ -1,32 +1,29 @@
-- model_class = Story
+- if current_user
+  .btn-toolbar.pull-right
+    = render partial: 'elements/story_action_links', locals: { story: @story, group_class: 'btn-group', btn_options: {class: 'btn btn-primary'}}
+
 .page-header
   %h1= @story.title
 .story-text
   = raw @story.text
 
-.form-group
-  = link_to t('.back', :default => t("helpers.links.back")), |
-    stories_path, :class => 'btn btn-default'                |
-  -#
-  = link_to t('.edit', :default => t("helpers.links.edit")), |
-    edit_story_path(@story), :class => 'btn btn-default'     |
-  -#
-  = link_to t('.destroy', :default => t("helpers.links.destroy")),                                               |
-    story_path(@story),                                                                                          |
-    :method => 'delete',                                                                                         |
-    :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, |
-    :class => 'btn btn-danger'                                                                                   |
-
 .comments
-  %ul.media-list
-    - @story.comments.each do |comment|
-      = render partial: 'elements/comment', locals: { comment: comment }
+  %h4 Comments
 
-  = simple_form_for [@story, @story.comments.build] do |f|
-    .form-group
-      = f.label :text, :class => 'control-label col-md-1'
-      .col-md-11
-        = f.text_area :text, rows: 3, :class => 'text-field form-control'
-    .form-group
-      .col-md-10
-        = f.submit nil, :class => 'btn btn-primary'
+  - if @story.comments.present?
+    %ul.media-list
+      - @story.comments.each do |comment|
+        = render partial: 'elements/comment', locals: { comment: comment, story: @story }
+
+  - else
+    %p There are currently no comments on this story. Be the first!
+
+  - if current_user
+    %h4 Add new comment
+    = simple_form_for [@story, @story.comments.build] do |f|
+      .form-group.row
+        .col-md-12
+          = f.text_area :text, rows: 3, :class => 'text-field form-control'
+      .form-group.row
+        .col-md-10
+          = f.submit nil, :class => 'btn btn-primary'

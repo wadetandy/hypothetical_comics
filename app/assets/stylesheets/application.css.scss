@@ -17,6 +17,9 @@
 
 @import "bootstrap";
 
+$fa-font-path: '/assets/font-awesome/fonts';
+@import 'font-awesome/scss/font-awesome';
+
 //->Prelang (ui_framework:twitter_bootstrap)
 
 // Give everything in 'yield' margin to separate it.
@@ -32,4 +35,8 @@
 //->Prelang (user_login:devise)
 .form-user {
   max-width: 450px;
+}
+
+ul.btn-group li {
+  list-style-type: none;
 }

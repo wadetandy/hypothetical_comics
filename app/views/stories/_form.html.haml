@@ -5,5 +5,4 @@
     = f.text_area :text, :class => 'text-field form-control bind-ckeditor'
   .form-group
     = f.submit nil, :class => 'btn btn-primary'
-    = link_to t('.cancel', :default => t("helpers.links.cancel")), |
-      stories_path, :class => 'btn btn-default'                    |
+    = link_to 'Cancel', :back, :class => 'btn btn-default'

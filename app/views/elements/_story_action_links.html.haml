@@ -1,0 +1,15 @@
+- story = local_assigns.delete(:story)
+
+%ul{class: local_assigns.delete(:group_class)}
+  - if @story.user == current_user
+    = link_to story_path(story), btn_options.merge(method: 'delete',
+      data: { confirm: 'Are you sure you want to delete your story?' }) do
+      %i.fa.fa-trash-o
+    = link_to edit_story_path(@story), btn_options do
+      %i.fa.fa-pencil
+
+  - else
+    = link_to upvote_story_path(story), btn_options.merge(method: 'post') do
+      %i.fa.fa-arrow-up
+    = link_to downvote_story_path(story), btn_options.merge(method: 'post') do
+      %i.fa.fa-arrow-down

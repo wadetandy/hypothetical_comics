@@ -3,12 +3,14 @@ Rails.application.routes.draw do
 
   resources :stories do
     member do
-      get "vote"
+      post 'upvote'
+      post 'downvote'
     end
 
     resources :comments do
       member do
-        get "vote"
+        post 'upvote'
+        post 'downvote'
       end
     end
   end

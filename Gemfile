@@ -41,6 +41,8 @@ gem 'unicorn'
 
 gem 'bundler'
 
+gem 'will_paginate'
+
 gem 'delayed_job'
 gem 'delayed_job_active_record'
 gem 'bootstrap-sass', github: 'twbs/bootstrap-sass'

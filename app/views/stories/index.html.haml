@@ -1,29 +1,23 @@
-- model_class = Story
 .page-header
-  %h1= t '.title', :default => Story
+  %h1 Latest Stories
 %table.table.table-striped
   %thead
     %tr
-      %th ID
-      %th= model_class.human_attribute_name(:text)
-      %th= model_class.human_attribute_name(:title)
-      %th= model_class.human_attribute_name(:deleted_at)
-      %th= model_class.human_attribute_name(:created_at)
-      %th= t '.actions', :default => t("helpers.actions")
+      %th Title
+      %th Summary
+      %th Author
+      %th Rating
+      %th
   %tbody
     - @stories.each do |story|
       %tr
-        %td= story.id
-        %td= story.text
-        %td= story.title
-        %td= story.deleted_at
-        %td= l story.created_at, format: :long
-        %td
-          = link_to story_path(story), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do
-            = glyph 'info-sign'
-            = glyph 'pencil'
-          = link_to story_path(story), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do
-            = glyph 'remove'
+        %td= link_to story.title, story_path(story)
+        %td= story.description
+        %td= link_to story.user.display_name, user_path(story.user)
+        %td= vote_percentage(story)
+        %td.col-md-1
+          .pull-right
+            = edit_story_button(story)
 = link_to t('.new', :default => t("helpers.links.new")), |
   new_story_path,                                        |
   :class => 'btn btn-primary'                            |

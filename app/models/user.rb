@@ -7,9 +7,10 @@ class User < ActiveRecord::Base
 
   #->Prelang (user_login/devise)
   has_many :stories
-  has_many :users
-  belongs_to :user
+  # has_many :users
+  # belongs_to :user
   has_many :comments
+
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(provider: auth.provider, uid: auth.uid).first
 
@@ -26,7 +27,7 @@ class User < ActiveRecord::Base
 
 
   attr_accessor :login
-  
+
   #->Prelang (user_login:devise/username_login_support)
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup
@@ -39,5 +40,17 @@ class User < ActiveRecord::Base
 
 
   devise authentication_keys: [:login]
-  acts_as_votable 
+  acts_as_votable
+
+  def gravatar_hash
+    Digest::MD5.hexdigest self.email.strip.downcase
+  end
+
+  def avatar_url(dimension = 100)
+    "https://www.gravatar.com/avatar/#{gravatar_hash}.jpg?s=#{dimension}"
+  end
+
+  def display_name
+    attributes[:display_name] || username
+  end
 end

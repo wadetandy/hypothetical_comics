@@ -1,10 +1,20 @@
-%li.media
+%li.media.comment
   = user_avatar(comment.user, class: 'pull-left')
   .media-body
     %h4.media-heading
       = comment.title
     %p
       = comment.text
+    .action-buttons
+      - if comment.user == current_user
+        = link_to [story, comment], method: 'delete' do
+          %i.fa.fa-trash-o
+      - else
+        -# = link_to upvote_story_comment_path(story, comment), method: 'post' do
+        -#   %i.fa.fa-arrow-up
+        -# = link_to downvote_story_comment_path(story, comment), method: 'post' do
+        -#   %i.fa.fa-arrow-down
+
     %ul
       - comment.children.each do |comment|
         = render partial: 'elements/comment', locals: { comment: comment }

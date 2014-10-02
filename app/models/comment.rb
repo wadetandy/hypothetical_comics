@@ -4,4 +4,6 @@ class Comment < ActiveRecord::Base
   has_many :children, class_name: 'Comment'
   belongs_to :comment
   acts_as_votable
+
+  validates_presence_of :text, :user, :story
 end

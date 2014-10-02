@@ -1,0 +1,22 @@
+.page-header
+  %h1= @user.display_name
+
+.row-fluid
+  .col-md-2
+    = user_avatar(@user, size: 160)
+
+.row-fluid
+  %h4.col-md-12= "#{@user.display_name}'s Stories"
+.row-fluid
+  %table.table.table-bordered.col-md-12
+    %thead
+      %th Title
+      %th Description
+      %th Date Submitted
+
+    %tbody
+      - @user.stories.limit(10).each do |story|
+        %tr
+          %td= link_to story.title, story_path(story)
+          %td= story.description
+          %td= standard_date(story.created_at)
