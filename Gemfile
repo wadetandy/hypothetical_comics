@@ -58,6 +58,7 @@ gem 'validates_formatting_of'
 gem 'tzinfo-data'
 
 gem 'sanitize'
+gem 'pg'
 
 group :development, :test do
   gem 'dotenv-rails'
