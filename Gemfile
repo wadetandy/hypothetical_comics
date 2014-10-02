@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby '1.9.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.1'
@@ -60,6 +60,10 @@ gem 'sanitize'
 gem 'pg'
 
 gem 'pry-rails'
+
+group :production, :staging do
+  gem 'rails_12factor'
+end
 
 group :development, :test do
   gem 'dotenv-rails'
