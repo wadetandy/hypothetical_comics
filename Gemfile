@@ -58,6 +58,7 @@ gem 'tzinfo-data'
 
 gem 'sanitize'
 gem 'pg'
+gem 'ckeditor'
 
 gem 'pry-rails'
 

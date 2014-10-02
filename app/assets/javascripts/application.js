@@ -13,9 +13,4 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//= require ckeditor/ckeditor
-//= require ckeditor/adapters/jquery
-
-$(document).ready(function() {
-    $('.bind-ckeditor').ckeditor()
-})
+//= require ckeditor/init

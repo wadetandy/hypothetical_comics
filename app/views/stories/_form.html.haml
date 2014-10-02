@@ -2,7 +2,7 @@
   .form-group
     = f.text_field :title, :class => 'text-field form-control', placeholder: "Story Title"
   .form-group
-    = f.text_area :text, :class => 'text-field form-control bind-ckeditor'
+    = f.cktext_area :text, :class => 'text-field form-control', :ckeditor => {:toolbar => 'mini'}
   .form-group
     = f.submit nil, :class => 'btn btn-primary'
     = link_to 'Cancel', :back, :class => 'btn btn-default'
